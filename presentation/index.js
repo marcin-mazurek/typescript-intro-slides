@@ -5,6 +5,7 @@ import {
   Appear,
   BlockQuote,
   Cite,
+  CodePane,
   Deck,
   Heading,
   Image,
@@ -21,9 +22,39 @@ import {
 import Terminal from 'spectacle-terminal';
 
 import styled from 'react-emotion';
+
 const CustomList = styled(List)`
   line-height: 190%;
 `;
+
+const WideSlide = styled(Slide)`
+  max-height: 80%;
+  max-width: 80%;
+`;
+
+const FullWidthSlide = styled(Slide)`
+  max-height: 100%;
+  max-width: 100%;
+`;
+
+const Columns = styled('div')`
+  display: flex;
+  justify-content: center;
+`;
+
+const Column = styled('div')`
+  margin: 0 15px;
+  flex: 1;
+`;
+
+const Code = ({ lang, fileName }) => (
+  <CodePane
+    textSize={30}
+    lang={lang || "ts"}
+    source={require(`raw-loader!./code/${fileName}`)}
+    theme="okaida"
+  />
+);
 
 import createTheme from 'spectacle/lib/themes/default';
 
@@ -97,21 +128,49 @@ export default class Presentation extends React.Component {
             <li>Unlike Flow, it's stable, mature, and the most popular - according to number of downloads and stars on GitHub</li>
           </Notes>
         </Slide>
-        <Slide transition={['fade']} bgColor="secondary" textColor="primary">
-          <h2>Children</h2>
-          <Terminal title="1. elijahm@elijahm: ~(zsh)" output={[
-            "npm test",
-            <div style={{ color: "#33B969"}}>TOTAL: 174 SUCCESS</div>,
-            <div>
-              <div>=============================== Coverage summary ===============================</div>
-              <div style={{ color: "#DEC612"}}>Statements   : 51.29% ( 278/542 )</div>
-              <div style={{ color: "#EE5057"}}>Branches     : 38.78% ( 95/245 )</div>
-              <div style={{ color: "#EE5057"}}>Functions    : 46.21% ( 61/132 )</div>
-              <div style={{ color: "#DEC612"}}>Lines        : 52.69% ( 274/520 )</div>
-              <div>================================================================================</div>
-            </div>]}
-          />
+        <Slide transition={['fade']} bgColor="tertiary" textColor="primary">
+          <Heading size={3} textColor="primary">
+            JavaScript types
+          </Heading>
+          <div style={{ marginTop: '30px '}}>
+            <Code fileName="types-js.ts" />
+          </div>
+          <Notes>
+            <ul>
+              <li>undefined is unassigned (default empty) value</li>
+              <li>null is explicitly assigned empty value</li>
+            </ul>
+          </Notes>
         </Slide>
+        <WideSlide transition={['fade']} bgColor="tertiary" textColor="primary">
+          <Heading size={3} textColor="primary">
+            TypeScript types
+          </Heading>
+          <div style={{ marginTop: '30px '}}>
+            <Code fileName="types-ts.ts" />
+          </div>
+        </WideSlide>
+        <Slide transition={['fade']} bgColor="secondary" textColor="black">
+          <Terminal title="Terminal" output={[
+            "git clone https://github.com/marcin-mazurek/typescript-intro-tasks.git",
+            "cd typescript-intro-tasks",
+            "npm install",
+            ["npm test", <span>npm test <em># each time to execute tests</em></span>],
+          ]} />
+        </Slide>
+        <WideSlide transition={['zoom']} bgColor="primary">
+          <Heading size={3} lineHeight={1}>Task #1</Heading>
+          <CustomList>
+            <ListItem>Open <code>task-1/greet.ts</code></ListItem>
+            <ListItem>Add argument and output type definition</ListItem>
+            <ListItem>Open <code>task-1/greet.test.ts</code></ListItem>
+            <ListItem>Try passing an incorrect type and watch the compiler error</ListItem>
+            <ListItem>Write a function that adds two numbers and implement tests</ListItem>
+            <ListItem>Write a function that checks if a number is even</ListItem>
+          </CustomList>
+          <Heading size={5} lineHeight={2}>Cheatsheet</Heading>
+          <Code fileName="task-1.ts" />
+        </WideSlide>
       </Deck>
     );
   }
