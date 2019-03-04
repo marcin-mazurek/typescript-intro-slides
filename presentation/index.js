@@ -7,13 +7,13 @@ import {
   Cite,
   CodePane,
   Deck,
-  Heading,
+  Heading as BaseHeading,
   Image,
   List,
   ListItem,
   Notes,
   Quote,
-  Slide,
+  Slide as BaseSlide,
   Text,
   Layout,
   Fill
@@ -27,14 +27,9 @@ const CustomList = styled(List)`
   line-height: 190%;
 `;
 
-const WideSlide = styled(Slide)`
-  max-height: 80%;
-  max-width: 80%;
-`;
-
-const FullWidthSlide = styled(Slide)`
+const WideSlide = styled(BaseSlide)`
   max-height: 100%;
-  max-width: 100%;
+  max-width: 80%;
 `;
 
 const Columns = styled('div')`
@@ -47,9 +42,13 @@ const Column = styled('div')`
   flex: 1;
 `;
 
-const Code = ({ lang, fileName }) => (
+const Heading = styled(BaseHeading)`
+  margin-bottom: 50px;
+`;
+
+const Code = ({ lang, fileName, textSize }) => (
   <CodePane
-    textSize={30}
+    textSize={textSize || 30}
     lang={lang || "ts"}
     source={require(`raw-loader!./code/${fileName}`)}
     theme="okaida"
@@ -71,6 +70,31 @@ const theme = createTheme(
   }
 );
 
+const Slide = ({ theme, wide, ...props }) => {
+  const baseProps = {
+    transition: ['fade']
+  };
+
+  if (theme === 'primary' || theme === undefined) {
+    baseProps.bgColor = 'primary';
+    baseProps.textColor = 'secondary';
+  } else if (theme === 'secondary') {
+    baseProps.bgColor = 'secondary';
+    baseProps.textColor = 'black';
+  } else if (theme === 'tertiary') {
+    baseProps.bgColor = 'tertiary';
+    baseProps.textColor = 'primary';
+  } else {
+    throw new Error('Unsupported theme: ' + theme);
+  }
+
+  if (wide) {
+    return <WideSlide {...baseProps} {...props} />;
+  } else {
+    return <BaseSlide {...baseProps} {...props} />;
+  }
+}
+
 const typeScriptLogo = require('../assets/typescript.svg');
 
 export default class Presentation extends React.Component {
@@ -81,18 +105,18 @@ export default class Presentation extends React.Component {
         transitionDuration={500}
         theme={theme}
       >
-        <Slide transition={['zoom']} bgColor="primary">
+        <Slide theme="primary">
           <Image src={typeScriptLogo} width={800} />
           <Heading size={1} fit lineHeight={2} textColor="secondary">
             Introduction for QA engineers
           </Heading>
         </Slide>
-        <Slide transition={['fade']} bgColor="tertiary">
+        <Slide theme="tertiary">
           <Heading size={3} textColor="primary">
             What is TypeScript?
           </Heading>
           <CustomList textColor="primary">
-            <Appear><ListItem bulletStyle="arrow">TypeScript is a programming language developed by Microsoft</ListItem></Appear>
+            <Appear><ListItem>TypeScript is a programming language developed by Microsoft</ListItem></Appear>
             <Appear><ListItem>TypeScript compiles to JavaScript</ListItem></Appear>
             <Appear><ListItem>TypeScript is superset of JavaScript</ListItem></Appear>
             <Appear><ListItem>You can use it outside the browser (Node.js)</ListItem></Appear>
@@ -106,7 +130,7 @@ export default class Presentation extends React.Component {
             </ul>
           </Notes>
         </Slide>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+        <Slide theme="primary">
           <Heading size={3} textColor="secondary">
             Why use TypeScript?
           </Heading>
@@ -128,13 +152,11 @@ export default class Presentation extends React.Component {
             <li>Unlike Flow, it's stable, mature, and the most popular - according to number of downloads and stars on GitHub</li>
           </Notes>
         </Slide>
-        <Slide transition={['fade']} bgColor="tertiary" textColor="primary">
-          <Heading size={3} textColor="primary">
+        <Slide theme="primary">
+          <Heading size={3}>
             JavaScript types
           </Heading>
-          <div style={{ marginTop: '30px '}}>
-            <Code fileName="types-js.ts" />
-          </div>
+          <Code fileName="types-js.ts" />
           <Notes>
             <ul>
               <li>undefined is unassigned (default empty) value</li>
@@ -142,15 +164,62 @@ export default class Presentation extends React.Component {
             </ul>
           </Notes>
         </Slide>
-        <WideSlide transition={['fade']} bgColor="tertiary" textColor="primary">
-          <Heading size={3} textColor="primary">
+        <Slide theme="secondary">
+          <Heading size={1} fit lineHeight={2} textColor="primary">
+            Why should I care?
+          </Heading>
+          <Notes>
+            The basic types don't change - any valid JavaScript is valid TypeScript.
+            Also, TypeScript compiles to JavaScript, and it's JavaScript engine that executes your code.
+            Any notion of TypeScript is removed in the runtime, and you're only left with basic JavaScript types.
+          </Notes>
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} textColor="secondary">
             TypeScript types
           </Heading>
-          <div style={{ marginTop: '30px '}}>
-            <Code fileName="types-ts.ts" />
-          </div>
-        </WideSlide>
-        <Slide transition={['fade']} bgColor="secondary" textColor="black">
+          <Code fileName="types-ts.ts" />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} textColor="secondary">
+            How to declare a variable?
+          </Heading>
+          <Code fileName="variables.ts" />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} textColor="secondary">
+            How to declare a constant?
+          </Heading>
+          <Code fileName="constants.ts" />
+        </Slide>
+        <Slide theme="tertiary">
+          <Heading size={3} textColor="primary">
+            What should I use?
+          </Heading>
+          <CustomList textColor="primary">
+            <Appear><ListItem><strong>const</strong> - by default</ListItem></Appear>
+            <Appear><ListItem><strong>let</strong> - if you need to mutate a variable</ListItem></Appear>
+            <Appear><ListItem><strong>var</strong> - never</ListItem></Appear>
+          </CustomList>
+          <Notes>
+            <ul>
+              <li>What is TS and how is it different from JS?</li>
+              <li>TS is superset of JS - Valid JS code is valid TS. This makes it possible to introduce TS to already existing project easily, and provides an easy learning curve</li>
+              <li>Using TypeScript, you can still use any library from JavaScript eco-system, which makes it a very powerful language</li>
+            </ul>
+          </Notes>
+        </Slide>
+        <Slide wide theme="primary">
+          <BaseHeading size={5} textColor="tertiary" lineHeight={2}>
+            Exporting from modules
+          </BaseHeading>
+          <Code fileName="modules.ts" />
+          <BaseHeading size={5} textColor="tertiary" lineHeight={2}>
+            Importing from modules
+          </BaseHeading>
+          <Code fileName="modules2.ts" />
+        </Slide>
+        <Slide theme="secondary">
           <Terminal title="Terminal" output={[
             "git clone https://github.com/marcin-mazurek/typescript-intro-tasks.git",
             "cd typescript-intro-tasks",
@@ -158,8 +227,8 @@ export default class Presentation extends React.Component {
             ["npm test", <span>npm test <em># each time to execute tests</em></span>],
           ]} />
         </Slide>
-        <WideSlide transition={['zoom']} bgColor="primary">
-          <Heading size={3} lineHeight={1}>Task #1</Heading>
+        <Slide wide theme="primary">
+          <Heading size={3} lineHeight={1}>Task #1 - function signatures</Heading>
           <CustomList>
             <ListItem>Open <code>task-1/greet.ts</code></ListItem>
             <ListItem>Add argument and output type definition</ListItem>
@@ -170,7 +239,47 @@ export default class Presentation extends React.Component {
           </CustomList>
           <Heading size={5} lineHeight={2}>Cheatsheet</Heading>
           <Code fileName="task-1.ts" />
-        </WideSlide>
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3}>
+            Classes
+          </Heading>
+          <Code fileName="classes.ts" textSize={25} />
+        </Slide>
+        <Slide theme="secondary">
+          <Terminal title="Terminal" output={[
+            "npm run enable-task-2",
+          ]} />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} lineHeight={1}>Task #2 - classes in practise</Heading>
+          <Columns>
+            <Column>
+              <Heading size={5} lineHeight={2}>To do</Heading>
+              <CustomList>
+                <ListItem>Review <code>task-2/user.test.ts</code></ListItem>
+                <ListItem>Make the test pass :)</ListItem>
+              </CustomList>
+            </Column>
+            <Column>
+              <Heading size={5} lineHeight={2}>Cheatsheet</Heading>
+              <Code fileName="task-2.ts" textSize={25} />
+            </Column>
+          </Columns>
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} lineHeight={1}>Task #2.1 - shorter constructor</Heading>
+          <div style={{ marginBottom: '50px' }}>
+            <Text>Use the automatic paramater assignment syntax:</Text>
+          </div>
+          <Code fileName="task-2-1.ts" />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3}>
+            Arrow functions
+          </Heading>
+          <Code fileName="arrow-fns.ts" />
+        </Slide>
       </Deck>
     );
   }

@@ -1,14 +1,14 @@
-const _number_ = 1;
-const _string_ = 'string';
-const _boolean_ = false;
-const _undefined_;
-const _null_ = null;
-const _symbol_ = Symbol('unique_identifier');
+const myNumber = 1;
+const myString = 'string';
+const myBoolean = false;
+const myUndefined;
+const myMull = null;
+const mySymbol = Symbol('unique_identifier');
 
-const _object_ = {
+const myObject = {
     key1: 'value',
     key2: 'value'
 };
 
-// array is also an object
-const _array_ = [1, 2, 3];
+const myArray = [1, 2, 3];
+typeof myArray === 'object'; // array is also an object
