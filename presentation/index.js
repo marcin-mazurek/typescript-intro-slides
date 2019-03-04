@@ -24,7 +24,9 @@ import Terminal from 'spectacle-terminal';
 import styled from 'react-emotion';
 
 const CustomList = styled(List)`
-  line-height: 190%;
+  & li {
+    margin-bottom: 24px;
+  }
 `;
 
 const WideSlide = styled(BaseSlide)`
@@ -51,7 +53,7 @@ const Code = ({ lang, fileName, textSize }) => (
     textSize={textSize || 30}
     lang={lang || "ts"}
     source={require(`raw-loader!./code/${fileName}`)}
-    theme="okaida"
+    theme="external"
   />
 );
 
@@ -80,7 +82,7 @@ const Slide = ({ theme, wide, ...props }) => {
     baseProps.textColor = 'secondary';
   } else if (theme === 'secondary') {
     baseProps.bgColor = 'secondary';
-    baseProps.textColor = 'black';
+    baseProps.textColor = 'primary';
   } else if (theme === 'tertiary') {
     baseProps.bgColor = 'tertiary';
     baseProps.textColor = 'primary';
@@ -219,12 +221,35 @@ export default class Presentation extends React.Component {
           </BaseHeading>
           <Code fileName="modules2.ts" />
         </Slide>
-        <Slide theme="secondary">
+        <Slide wide theme="secondary">
+          <Heading size={3} textColor="primary">
+            Coding standards
+          </Heading>
+          <BaseHeading size={5} textColor="primary">
+            Most popular
+          </BaseHeading>
+          <CustomList textColor="primary">
+            <ListItem>variables, functions, methods - <strong>camelCase</strong></ListItem>
+            <ListItem>classes, interfaces, enum names and values - <strong>PascalCase</strong> (no <code>I</code> prefix or <code>Impl</code> suffix)</ListItem>
+            <ListItem>declaring string content with single quotes: <pre style={{ marginTop: '10px' }}>const myString = 'abc';</pre></ListItem>
+            <ListItem>using template string only when escaping or string interpolation is required: <pre style={{ marginTop: '10px' }}>{'const message = `Hello ${name}`;'}</pre></ListItem>
+          </CustomList>
+          <br />
+          <BaseHeading size={5} textColor="primary">
+            Vary across projects
+          </BaseHeading>
+          <CustomList textColor="primary">
+            <ListItem>naming files - <code>kebab-case.ts</code> vs <code>camelCase.ts</code> vs <code>PascalCase.ts</code></ListItem>
+            <ListItem>whether to prefix protected and private members with an underscore</ListItem>
+            <ListItem>configuration constants - <strong>UPPERCASE_WITH_UNDERSCORES</strong> vs <strong>camelCase</strong></ListItem>
+          </CustomList>
+        </Slide>
+        <Slide theme="secondary" textColor="black">
           <Terminal title="Terminal" output={[
             "git clone https://github.com/marcin-mazurek/typescript-intro-tasks.git",
             "cd typescript-intro-tasks",
             "npm install",
-            ["npm test", <span>npm test <em># each time to execute tests</em></span>],
+            ["npm test", <span>npm test <em># executes tests once</em></span>],
           ]} />
         </Slide>
         <Slide wide theme="primary">
@@ -246,7 +271,7 @@ export default class Presentation extends React.Component {
           </Heading>
           <Code fileName="classes.ts" textSize={25} />
         </Slide>
-        <Slide theme="secondary">
+        <Slide theme="secondary" textColor="black">
           <Terminal title="Terminal" output={[
             "npm run enable-task-2",
           ]} />
@@ -273,6 +298,41 @@ export default class Presentation extends React.Component {
             <Text>Use the automatic paramater assignment syntax:</Text>
           </div>
           <Code fileName="task-2-1.ts" />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3}>
+            Interfaces and inheritance
+          </Heading>
+          <Code fileName="interfaces.ts" textSize={25} />
+        </Slide>
+        <Slide theme="tertiary">
+          <Heading size={3} textColor="primary">
+            OOP limitations
+          </Heading>
+          <CustomList>
+            <Appear><ListItem>No multi-inheritance</ListItem></Appear>
+            <Appear><ListItem>No mixins support by TypeScript syntax (possible in vanilla JavaScript and using decorators - annotations equivalent)</ListItem></Appear>
+            <Appear><ListItem>No run-time type checks (unless an additional library is used)</ListItem></Appear>
+            <Appear><ListItem>Overloading is very tricky due to no native JavaScript equivalent</ListItem></Appear>
+          </CustomList>
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} lineHeight={1}>Task #2.2 - interfaces in practice</Heading>
+          <CustomList>
+            <ListItem>Implement <code>BaseUser</code> interface with <code>name</code> and <code>age</code> properties</ListItem>
+            <ListItem>Make <code>User</code> implement <code>BaseUser</code> interface</ListItem>
+            <ListItem>Allow to pass <code>BaseUser</code> as a child</ListItem>
+            <ListItem>
+              Add another test case that will test the possibility of adding any object matching <code>BaseUser</code> interface using <em>object literal</em> syntax:
+              <div style={{ marginTop: '25px' }}>
+                <Code fileName="task-2-2.ts" />
+              </div>
+            </ListItem>
+          </CustomList>
+          <Heading size={5} lineHeight={1}>Cheatsheet</Heading>
+          <div style={{ marginTop: '25px' }}>
+            <Code fileName="task-2-2-cheatsheet.ts" />
+          </div>
         </Slide>
         <Slide wide theme="primary">
           <Heading size={3}>

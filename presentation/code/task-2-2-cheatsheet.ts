@@ -1,0 +1,3 @@
+interface InterfaceName {
+  property: type;
+}
