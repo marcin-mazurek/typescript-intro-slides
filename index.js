@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Redbox from 'redbox-react';
 import { AppContainer } from 'react-hot-loader';
 
-import Presentation from './presentation';
+import Presentation from './presentation/presentation';
 
 const CustomErrorReporter = ({ error }) => <Redbox error={error} />;
 
@@ -20,8 +20,8 @@ ReactDOM.render(
 );
 
 if (module.hot) {
-  module.hot.accept('./presentation', () => {
-    const NextPresentation = require('./presentation').default;
+  module.hot.accept('./presentation/presentation', () => {
+    const NextPresentation = require('./presentation/presentation').default;
     ReactDOM.render(
       <AppContainer errorReporter={CustomErrorReporter}>
         <NextPresentation />

@@ -3,102 +3,19 @@ require('normalize.css');
 import React from 'react';
 import {
   Appear,
-  BlockQuote,
-  Cite,
-  CodePane,
   Deck,
   Heading as BaseHeading,
   Image,
-  List,
   ListItem,
   Notes,
-  Quote,
-  Slide as BaseSlide,
   Text,
-  Layout,
-  Fill
 } from 'spectacle';
 
 import Terminal from 'spectacle-terminal';
-
-import styled from 'react-emotion';
-
-const CustomList = styled(List)`
-  & li {
-    margin-bottom: 24px;
-  }
-`;
-
-const WideSlide = styled(BaseSlide)`
-  max-height: 100%;
-  max-width: 80%;
-`;
-
-const Columns = styled('div')`
-  display: flex;
-  justify-content: center;
-`;
-
-const Column = styled('div')`
-  margin: 0 15px;
-  flex: 1;
-`;
-
-const Heading = styled(BaseHeading)`
-  margin-bottom: 50px;
-`;
-
-const Code = ({ lang, fileName, textSize }) => (
-  <CodePane
-    textSize={textSize || 30}
-    lang={lang || "ts"}
-    source={require(`raw-loader!./code/${fileName}`)}
-    theme="external"
-  />
-);
-
-import createTheme from 'spectacle/lib/themes/default';
-
-const theme = createTheme(
-  {
-    primary: 'white',
-    secondary: '#1F2022',
-    tertiary: '#03A9FC',
-    quaternary: '#CECECE'
-  },
-  {
-    primary: 'Montserrat',
-    secondary: 'Helvetica'
-  }
-);
-
-const Slide = ({ theme, wide, ...props }) => {
-  const baseProps = {
-    transition: ['fade']
-  };
-
-  if (theme === 'primary' || theme === undefined) {
-    baseProps.bgColor = 'primary';
-    baseProps.textColor = 'secondary';
-  } else if (theme === 'secondary') {
-    baseProps.bgColor = 'secondary';
-    baseProps.textColor = 'primary';
-  } else if (theme === 'tertiary') {
-    baseProps.bgColor = 'tertiary';
-    baseProps.textColor = 'primary';
-  } else {
-    throw new Error('Unsupported theme: ' + theme);
-  }
-
-  if (wide) {
-    return <WideSlide {...baseProps} {...props} />;
-  } else {
-    return <BaseSlide {...baseProps} {...props} />;
-  }
-}
+import { List, Columns, Column, Heading, Code, Slide } from './custom-components';
+import theme from './theme';
 
 const typeScriptLogo = require('../assets/typescript.svg');
-
 export default class Presentation extends React.Component {
   render() {
     return (
@@ -117,13 +34,13 @@ export default class Presentation extends React.Component {
           <Heading size={3} textColor="primary">
             What is TypeScript?
           </Heading>
-          <CustomList textColor="primary">
+          <List textColor="primary">
             <Appear><ListItem>TypeScript is a programming language developed by Microsoft</ListItem></Appear>
             <Appear><ListItem>TypeScript compiles to JavaScript</ListItem></Appear>
             <Appear><ListItem>TypeScript is superset of JavaScript</ListItem></Appear>
             <Appear><ListItem>You can use it outside the browser (Node.js)</ListItem></Appear>
             <Appear><ListItem>You can use any JavaScript library and tooling</ListItem></Appear>
-          </CustomList>
+          </List>
           <Notes>
             <ul>
               <li>What is TS and how is it different from JS?</li>
@@ -136,14 +53,14 @@ export default class Presentation extends React.Component {
           <Heading size={3} textColor="secondary">
             Why use TypeScript?
           </Heading>
-          <CustomList>
+          <List>
             <Appear><ListItem>It brings true OOP features - static types, interfaces, generics, public/private/protected access</ListItem></Appear>
             <Appear><ListItem>But it's totally optional to use those</ListItem></Appear>
             <Appear><ListItem>It has a smart compiler that catches a lot of mistakes before you run your code</ListItem></Appear>
             <Appear><ListItem>It works out of the box</ListItem></Appear>
             <Appear><ListItem>Used by Gaming developers</ListItem></Appear>
             <Appear><ListItem>Stable, mature, the most popular typing solution for JavaScript</ListItem></Appear>
-          </CustomList>
+          </List>
           <Notes>
             <li>It provides features well-known in object oriented programming languages such as static types, interfaces, generics, annotations (which are called decorators)
               public/private/protected access and more</li>
@@ -198,11 +115,11 @@ export default class Presentation extends React.Component {
           <Heading size={3} textColor="primary">
             What should I use?
           </Heading>
-          <CustomList textColor="primary">
+          <List textColor="primary">
             <Appear><ListItem><strong>const</strong> - by default</ListItem></Appear>
             <Appear><ListItem><strong>let</strong> - if you need to mutate a variable</ListItem></Appear>
             <Appear><ListItem><strong>var</strong> - never</ListItem></Appear>
-          </CustomList>
+          </List>
           <Notes>
             <ul>
               <li>What is TS and how is it different from JS?</li>
@@ -228,21 +145,21 @@ export default class Presentation extends React.Component {
           <BaseHeading size={5} textColor="primary">
             Most popular
           </BaseHeading>
-          <CustomList textColor="primary">
+          <List textColor="primary">
             <ListItem>variables, functions, methods - <strong>camelCase</strong></ListItem>
             <ListItem>classes, interfaces, enum names and values - <strong>PascalCase</strong> (no <code>I</code> prefix or <code>Impl</code> suffix)</ListItem>
             <ListItem>declaring string content with single quotes: <pre style={{ marginTop: '10px' }}>const myString = 'abc';</pre></ListItem>
             <ListItem>using template string only when escaping or string interpolation is required: <pre style={{ marginTop: '10px' }}>{'const message = `Hello ${name}`;'}</pre></ListItem>
-          </CustomList>
+          </List>
           <br />
           <BaseHeading size={5} textColor="primary">
             Vary across projects
           </BaseHeading>
-          <CustomList textColor="primary">
+          <List textColor="primary">
             <ListItem>naming files - <code>kebab-case.ts</code> vs <code>camelCase.ts</code> vs <code>PascalCase.ts</code></ListItem>
             <ListItem>whether to prefix protected and private members with an underscore</ListItem>
             <ListItem>configuration constants - <strong>UPPERCASE_WITH_UNDERSCORES</strong> vs <strong>camelCase</strong></ListItem>
-          </CustomList>
+          </List>
         </Slide>
         <Slide theme="secondary" textColor="black">
           <Terminal title="Terminal" output={[
@@ -254,14 +171,14 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide wide theme="primary">
           <Heading size={3} lineHeight={1}>Task #1 - function signatures</Heading>
-          <CustomList>
+          <List>
             <ListItem>Open <code>task-1/greet.ts</code></ListItem>
             <ListItem>Add argument and output type definition</ListItem>
             <ListItem>Open <code>task-1/greet.test.ts</code></ListItem>
             <ListItem>Try passing an incorrect type and watch the compiler error</ListItem>
             <ListItem>Write a function that adds two numbers and implement tests</ListItem>
             <ListItem>Write a function that checks if a number is even</ListItem>
-          </CustomList>
+          </List>
           <Heading size={5} lineHeight={2}>Cheatsheet</Heading>
           <Code fileName="task-1.ts" />
         </Slide>
@@ -281,10 +198,10 @@ export default class Presentation extends React.Component {
           <Columns>
             <Column>
               <Heading size={5} lineHeight={2}>To do</Heading>
-              <CustomList>
+              <List>
                 <ListItem>Review <code>task-2/user.test.ts</code></ListItem>
                 <ListItem>Make the test pass :)</ListItem>
-              </CustomList>
+              </List>
             </Column>
             <Column>
               <Heading size={5} lineHeight={2}>Cheatsheet</Heading>
@@ -309,16 +226,16 @@ export default class Presentation extends React.Component {
           <Heading size={3} textColor="primary">
             OOP limitations
           </Heading>
-          <CustomList>
+          <List>
             <Appear><ListItem>No multi-inheritance</ListItem></Appear>
             <Appear><ListItem>No mixins support by TypeScript syntax (possible in vanilla JavaScript and using decorators - annotations equivalent)</ListItem></Appear>
             <Appear><ListItem>No run-time type checks (unless an additional library is used)</ListItem></Appear>
             <Appear><ListItem>Overloading is very tricky due to no native JavaScript equivalent</ListItem></Appear>
-          </CustomList>
+          </List>
         </Slide>
         <Slide wide theme="primary">
           <Heading size={3} lineHeight={1}>Task #2.2 - interfaces in practice</Heading>
-          <CustomList>
+          <List>
             <ListItem>Implement <code>BaseUser</code> interface with <code>name</code> and <code>age</code> properties</ListItem>
             <ListItem>Make <code>User</code> implement <code>BaseUser</code> interface</ListItem>
             <ListItem>Allow to pass <code>BaseUser</code> as a child</ListItem>
@@ -328,17 +245,115 @@ export default class Presentation extends React.Component {
                 <Code fileName="task-2-2.ts" />
               </div>
             </ListItem>
-          </CustomList>
+          </List>
           <Heading size={5} lineHeight={1}>Cheatsheet</Heading>
           <div style={{ marginTop: '25px' }}>
             <Code fileName="task-2-2-cheatsheet.ts" />
           </div>
         </Slide>
-        <Slide wide theme="primary">
-          <Heading size={3}>
+        <Slide wide theme="tertiary">
+          <Heading size={1} textColor="primary">
             Arrow functions
           </Heading>
-          <Code fileName="arrow-fns.ts" />
+        </Slide>
+        <Slide wide theme="primary">
+          <Code fileName="arrow-fns.ts" textSize={40} />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={5}>
+            Returning an object
+          </Heading>
+          <Code fileName="arrow-fns-3a.ts" textSize={35} />
+          <div style={{ marginTop: '70px' }}>
+            <Heading size={5}>
+              With function body
+            </Heading>
+          </div>
+          <Code fileName="arrow-fns-3b.ts" textSize={35} />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3}>
+            And the same, with types
+          </Heading>
+          <Code fileName="arrow-fns-2.ts" />
+        </Slide>
+        <Slide theme="secondary" textColor="black">
+          <Terminal title="Terminal" output={[
+            "npm run enable-task-3",
+          ]} />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} lineHeight={1}>Task #3 - arrow function</Heading>
+          <List>
+            <ListItem>Implement <code>getAdultUsersModel</code> function</ListItem>
+            <ListItem>Select users that are 18 years old or older</ListItem>
+            <ListItem>Map the data to return <code>name</code> and <code>age</code> field only</ListItem>
+            <ListItem>Unit tests will validate your solution</ListItem>
+          </List>
+          <Heading size={5}>Cheatsheet</Heading>
+          <Code fileName="task-3.ts" />
+        </Slide>
+        <Slide wide theme="tertiary">
+          <Heading size={1} textColor="primary">
+            The most tricky part of JavaScript - <code>this</code> keyword
+          </Heading>
+          <Notes>
+            The most tricky part of JavaScript is definitely the "this" keyword. The value of this variable is determined primarly by how a function is called, but it can be overwritten or
+            may not exist - depending on a context. Let's walk through the most popular use cases.
+          </Notes>
+        </Slide>
+        <Slide theme="primary">
+          <Heading size={3} lineHeight={1}><code>this</code> in global context</Heading>
+          <Code fileName="this-in-global-context.ts" />
+        </Slide>
+        <Slide theme="primary">
+          <Heading size={3} lineHeight={1}><code>this</code> in direct function call</Heading>
+          <Code fileName="this-in-direct-fn-call.ts" />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} lineHeight={1}><code>this</code> in object literals</Heading>
+          <Code fileName="this-in-object-literals.ts" />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} lineHeight={1}><code>this</code> in classes</Heading>
+          <Code fileName="this-in-classes.ts" />
+        </Slide>
+        <Slide wide theme="tertiary">
+          <Heading size={1} textColor="primary">
+            How to deal with <code>this</code>? 
+          </Heading>
+          <Heading size={3} textColor="primary">
+            Arrow functions to the rescue
+          </Heading>
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3}>
+            How to fix the incorrect <code>this</code> value with arrow function? - first example
+          </Heading>
+          <Code fileName="this-with-arrow-fns.ts" />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3}>
+            How to fix the incorrect <code>this</code> value with arrow function? - second example
+          </Heading>
+          <Columns>
+            <Column>
+              <Heading size={5}>Regular functions</Heading>
+              <Code fileName="this-with-arrow-fns-2-a.ts" />
+            </Column>
+            <Column>
+              <Heading size={5}>Arrow functions</Heading>
+              <Code fileName="this-with-arrow-fns-2-b.ts" />
+            </Column>
+          </Columns>
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} lineHeight={1}><code>this</code> in classes</Heading>
+          <Code fileName="this-with-arrow-fns.ts" />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} lineHeight={1}><code>this</code> modified by <code>bind</code>, <code>call</code> and <code>apply</code></Heading>
+          <Code fileName="this-with-bind-call-apply.ts" />
         </Slide>
       </Deck>
     );

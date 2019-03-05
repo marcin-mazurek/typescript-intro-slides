@@ -1,5 +1,8 @@
 // untyped
-const fn = (a, b) => a + b;
+const addNumbers = (a, b) => a + b;
 
 // typed
-const fn = (a: number, b: number): number => a + b;
+const addNumbers = (a: number, b: number): number => a + b;
+
+// calling the function
+console.log(addNumbers(1, 2)); // 3
