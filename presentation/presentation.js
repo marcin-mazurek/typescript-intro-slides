@@ -71,6 +71,25 @@ export default class Presentation extends React.Component {
             <li>Unlike Flow, it's stable, mature, and the most popular - according to number of downloads and stars on GitHub</li>
           </Notes>
         </Slide>
+        <Slide wide theme="secondary">
+          <Heading size={1} textColor="primary">
+            But... before we delve into TypeScript...
+          </Heading>
+        </Slide>
+        <Slide wide theme="tertiary">
+          <Heading size={1} textColor="primary">
+            Basics of JavaScript syntax
+          </Heading>
+        </Slide>
+        <Slide theme="primary">
+          <Code fileName="syntax-basics-1.ts" />
+        </Slide>
+        <Slide theme="primary">
+          <Code fileName="syntax-basics-2.ts" />
+        </Slide>
+        <Slide theme="primary">
+          <Code fileName="syntax-basics-3.ts" />
+        </Slide>
         <Slide theme="primary">
           <Heading size={3}>
             JavaScript types
@@ -83,20 +102,15 @@ export default class Presentation extends React.Component {
             </ul>
           </Notes>
         </Slide>
-        <Slide theme="secondary">
-          <Heading size={1} fit lineHeight={2} textColor="primary">
-            Why should I care?
+        <Slide theme="primary">
+          <Heading size={3} textColor="secondary">
+            TypeScript types
           </Heading>
           <Notes>
             The basic types don't change - any valid JavaScript is valid TypeScript.
             Also, TypeScript compiles to JavaScript, and it's JavaScript engine that executes your code.
             Any notion of TypeScript is removed in the runtime, and you're only left with basic JavaScript types.
           </Notes>
-        </Slide>
-        <Slide wide theme="primary">
-          <Heading size={3} textColor="secondary">
-            TypeScript types
-          </Heading>
           <Code fileName="types-ts.ts" />
         </Slide>
         <Slide wide theme="primary">
@@ -129,11 +143,11 @@ export default class Presentation extends React.Component {
           </Notes>
         </Slide>
         <Slide wide theme="primary">
-          <BaseHeading size={5} textColor="tertiary" lineHeight={2}>
+          <BaseHeading size={5} textColor="secondary" lineHeight={2}>
             Exporting from modules
           </BaseHeading>
           <Code fileName="modules.ts" />
-          <BaseHeading size={5} textColor="tertiary" lineHeight={2}>
+          <BaseHeading size={5} textColor="secondary" lineHeight={2}>
             Importing from modules
           </BaseHeading>
           <Code fileName="modules2.ts" />
@@ -163,7 +177,8 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide theme="secondary" textColor="black">
           <Terminal title="Terminal" output={[
-            "git clone https://github.com/marcin-mazurek/typescript-intro-tasks.git",
+            "git clone https://git.nonprod.williamhill.plc/",
+            "   ↪ mmazurek/TypeScript-Intro-Slides.git",
             "cd typescript-intro-tasks",
             "npm install",
             ["npm test", <span>npm test <em># executes tests once</em></span>],
@@ -350,6 +365,7 @@ export default class Presentation extends React.Component {
         <Slide wide theme="primary">
           <Heading size={3} lineHeight={1}><code>this</code> in classes</Heading>
           <Code fileName="this-with-arrow-fns.ts" />
+          <Notes>Arrow functions is not only about concise syntax. Additionally, they don't have their own context (this keyword), which makes them very powerful when working with callbacks.</Notes>
         </Slide>
         <Slide wide theme="primary">
           <Heading size={3} lineHeight={1}><code>this</code> modified by <code>bind</code>, <code>call</code> and <code>apply</code></Heading>

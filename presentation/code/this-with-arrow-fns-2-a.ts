@@ -6,10 +6,11 @@ class UserService {
     const context = this;
 
     fetch('http://myapi.com/users')
-      .then(function (response) {
-        return response.json();
+      .then(function (body: Body) {
+        return body.json();
       })
-      .then(function (users) {
+      .then(function (users: User[]) {
+        // possible to access variables from the parent functions due to closures
         context._users = users;
       });
   }
