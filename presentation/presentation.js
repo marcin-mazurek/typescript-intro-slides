@@ -16,6 +16,8 @@ import { List, Columns, Column, Heading, Code, Slide } from './custom-components
 import theme from './theme';
 
 const typeScriptLogo = require('../assets/typescript.svg');
+const goodWork = require('../assets/good-work.gif');
+
 export default class Presentation extends React.Component {
   render() {
     return (
@@ -30,6 +32,34 @@ export default class Presentation extends React.Component {
             Introduction for QA engineers
           </Heading>
         </Slide>
+        <Slide theme="primary" wide>
+          <Heading size={3} textColor="secondary">
+            A few facts about JavaScript
+          </Heading>
+          <List>
+            <Appear><ListItem>Weakly typed</ListItem></Appear>
+            <Appear><ListItem>Asynchronous, uses event loop currency model</ListItem></Appear>
+            <Appear><ListItem>Single-threaded by default</ListItem></Appear>
+            <Appear><ListItem>Supports multiple programming paradigms - procedural, functional and object-oriented</ListItem></Appear>
+            <Appear><ListItem>Works in a browser and outside of a browser (with Node.js runtime)</ListItem></Appear>
+            <Appear><ListItem>Interpreted - compilation (or transpilation) is optional</ListItem></Appear>
+          </List>
+          <br/>
+          <Appear>
+            <Heading size={5} textColor="secondary">
+              How the language is being developed?
+            </Heading>
+          </Appear>
+          <List>
+            <Appear><ListItem>Yearly spec updates (ECMAScript 2015, ES2016, etc.)</ListItem></Appear>
+            <Appear><ListItem>No possibility to specify required version of the language</ListItem></Appear>
+            <Appear><ListItem>New language features become available as vendors ship new browser versions or new Node.js runtimes</ListItem></Appear>
+          </List>
+          <Notes>
+            <li>Transpilation = it's a process of converting a newer language version to older version</li>
+            <li>Compilation (or transpilation) is optional, but essential to work with newer language features</li>
+          </Notes>
+        </Slide>
         <Slide theme="tertiary">
           <Heading size={3} textColor="primary">
             What is TypeScript?
@@ -38,7 +68,7 @@ export default class Presentation extends React.Component {
             <Appear><ListItem>TypeScript is a programming language developed by Microsoft</ListItem></Appear>
             <Appear><ListItem>TypeScript compiles to JavaScript</ListItem></Appear>
             <Appear><ListItem>TypeScript is superset of JavaScript</ListItem></Appear>
-            <Appear><ListItem>You can use it outside the browser (Node.js)</ListItem></Appear>
+            <Appear><ListItem>Works with Node.js</ListItem></Appear>
             <Appear><ListItem>You can use any JavaScript library and tooling</ListItem></Appear>
           </List>
           <Notes>
@@ -71,24 +101,48 @@ export default class Presentation extends React.Component {
             <li>Unlike Flow, it's stable, mature, and the most popular - according to number of downloads and stars on GitHub</li>
           </Notes>
         </Slide>
-        <Slide wide theme="secondary">
-          <Heading size={1} textColor="primary">
-            But... before we delve into TypeScript...
+        <Slide theme="tertiary">
+          <Heading size={3} textColor="primary">
+            Ecosystem
           </Heading>
+          <List textColor="primary">
+            <Appear><ListItem>npm - Node.js package manager (used for front-end JavaScript packages these days too)</ListItem></Appear>
+            <Appear><ListItem>yarn - Facebook's alternative to npm, used by majority of Gaming projects</ListItem></Appear>
+            <Appear><ListItem>npx - npm package runner, allows to run a CLI command without installing the package (eg. one-off project skeleton generation)</ListItem></Appear>
+            <Appear><ListItem>Babel - most popular JavaScript transpiler (not required when working with TypeScript)</ListItem></Appear>
+          </List>
+          <Notes>
+            <ul>
+              <li>What is TS and how is it different from JS?</li>
+              <li>TS is superset of JS - Valid JS code is valid TS. This makes it possible to introduce TS to already existing project easily, and provides an easy learning curve</li>
+              <li>Using TypeScript, you can still use any library from JavaScript eco-system, which makes it a very powerful language</li>
+            </ul>
+          </Notes>
         </Slide>
-        <Slide wide theme="tertiary">
+        <Slide wide theme="secondary">
           <Heading size={1} textColor="primary">
             Basics of JavaScript syntax
           </Heading>
         </Slide>
         <Slide theme="primary">
+          <Heading size={5} textColor="secondary">Basic types</Heading>
           <Code fileName="syntax-basics-1.ts" />
         </Slide>
         <Slide theme="primary">
+          <Heading size={5} textColor="secondary">Instructions</Heading>
           <Code fileName="syntax-basics-2.ts" />
         </Slide>
-        <Slide theme="primary">
-          <Code fileName="syntax-basics-3.ts" />
+        <Slide wider theme="primary">
+          <Heading size={5} textColor="secondary">Working with objects - the modern way</Heading>
+          <Code fileName="syntax-basics-3.ts" textSize={35} />
+        </Slide>
+        <Slide wider theme="primary">
+          <Heading size={5} textColor="secondary">Working with objects - the old-school way</Heading>
+          <Code fileName="syntax-basics-4.ts" textSize={35} />
+        </Slide>
+        <Slide wider theme="primary">
+          <Heading size={5} textColor="secondary">Working with objects - using object literals</Heading>
+          <Code fileName="syntax-basics-5.ts" textSize={35} />
         </Slide>
         <Slide theme="primary">
           <Heading size={3}>
@@ -113,13 +167,13 @@ export default class Presentation extends React.Component {
           </Notes>
           <Code fileName="types-ts.ts" />
         </Slide>
-        <Slide wide theme="primary">
+        <Slide wider theme="primary">
           <Heading size={3} textColor="secondary">
             How to declare a variable?
           </Heading>
           <Code fileName="variables.ts" />
         </Slide>
-        <Slide wide theme="primary">
+        <Slide wider theme="primary">
           <Heading size={3} textColor="secondary">
             How to declare a constant?
           </Heading>
@@ -142,11 +196,12 @@ export default class Presentation extends React.Component {
             </ul>
           </Notes>
         </Slide>
-        <Slide wide theme="primary">
+        <Slide wider theme="primary">
           <BaseHeading size={5} textColor="secondary" lineHeight={2}>
             Exporting from modules
           </BaseHeading>
           <Code fileName="modules.ts" />
+          <br />
           <BaseHeading size={5} textColor="secondary" lineHeight={2}>
             Importing from modules
           </BaseHeading>
@@ -171,8 +226,9 @@ export default class Presentation extends React.Component {
           </BaseHeading>
           <List textColor="primary">
             <ListItem>naming files - <code>kebab-case.ts</code> vs <code>camelCase.ts</code> vs <code>PascalCase.ts</code></ListItem>
-            <ListItem>whether to prefix protected and private members with an underscore</ListItem>
             <ListItem>configuration constants - <strong>UPPERCASE_WITH_UNDERSCORES</strong> vs <strong>camelCase</strong></ListItem>
+            <ListItem>whether to prefix protected and private members with an underscore</ListItem>
+            <ListItem>whether to use semicolons or not (they are optional)</ListItem>
           </List>
         </Slide>
         <Slide theme="secondary" textColor="black">
@@ -184,7 +240,7 @@ export default class Presentation extends React.Component {
             ["npm test", <span>npm test <em># executes tests once</em></span>],
           ]} />
         </Slide>
-        <Slide wide theme="primary">
+        <Slide wider theme="primary">
           <Heading size={3} lineHeight={1}>Task #1 - function signatures</Heading>
           <List>
             <ListItem>Open <code>task-1/greet.ts</code></ListItem>
@@ -194,12 +250,13 @@ export default class Presentation extends React.Component {
             <ListItem>Write a function that adds two numbers and implement tests</ListItem>
             <ListItem>Write a function that checks if a number is even</ListItem>
           </List>
-          <Heading size={5} lineHeight={2}>Cheatsheet</Heading>
+          <br/>
+          <Heading size={5}>Cheatsheet</Heading>
           <Code fileName="task-1.ts" />
         </Slide>
-        <Slide wide theme="primary">
+        <Slide wider theme="primary">
           <Heading size={3}>
-            Classes
+            TypeScript Classes
           </Heading>
           <Code fileName="classes.ts" textSize={25} />
         </Slide>
@@ -224,14 +281,14 @@ export default class Presentation extends React.Component {
             </Column>
           </Columns>
         </Slide>
-        <Slide wide theme="primary">
+        <Slide wider theme="primary">
           <Heading size={3} lineHeight={1}>Task #2.1 - shorter constructor</Heading>
           <div style={{ marginBottom: '50px' }}>
             <Text>Use the automatic paramater assignment syntax:</Text>
           </div>
           <Code fileName="task-2-1.ts" />
         </Slide>
-        <Slide wide theme="primary">
+        <Slide wider theme="primary">
           <Heading size={3}>
             Interfaces and inheritance
           </Heading>
@@ -271,10 +328,10 @@ export default class Presentation extends React.Component {
             Arrow functions
           </Heading>
         </Slide>
-        <Slide wide theme="primary">
+        <Slide wider theme="primary">
           <Code fileName="arrow-fns.ts" textSize={40} />
         </Slide>
-        <Slide wide theme="primary">
+        <Slide wider theme="primary">
           <Heading size={5}>
             Returning an object
           </Heading>
@@ -286,7 +343,7 @@ export default class Presentation extends React.Component {
           </div>
           <Code fileName="arrow-fns-3b.ts" textSize={35} />
         </Slide>
-        <Slide wide theme="primary">
+        <Slide wider theme="primary">
           <Heading size={3}>
             And the same, with types
           </Heading>
@@ -297,7 +354,7 @@ export default class Presentation extends React.Component {
             "npm run enable-task-3",
           ]} />
         </Slide>
-        <Slide wide theme="primary">
+        <Slide wider theme="primary">
           <Heading size={3} lineHeight={1}>Task #3 - arrow function</Heading>
           <List>
             <ListItem>Implement <code>getAdultUsersModel</code> function</ListItem>
@@ -305,6 +362,7 @@ export default class Presentation extends React.Component {
             <ListItem>Map the data to return <code>name</code> and <code>age</code> field only</ListItem>
             <ListItem>Unit tests will validate your solution</ListItem>
           </List>
+          <br/>
           <Heading size={5}>Cheatsheet</Heading>
           <Code fileName="task-3.ts" />
         </Slide>
@@ -321,7 +379,7 @@ export default class Presentation extends React.Component {
           <Heading size={3} lineHeight={1}><code>this</code> in global context</Heading>
           <Code fileName="this-in-global-context.ts" />
         </Slide>
-        <Slide theme="primary">
+        <Slide wider theme="primary">
           <Heading size={3} lineHeight={1}><code>this</code> in direct function call</Heading>
           <Code fileName="this-in-direct-fn-call.ts" />
         </Slide>
@@ -370,6 +428,53 @@ export default class Presentation extends React.Component {
         <Slide wide theme="primary">
           <Heading size={3} lineHeight={1}><code>this</code> modified by <code>bind</code>, <code>call</code> and <code>apply</code></Heading>
           <Code fileName="this-with-bind-call-apply.ts" />
+        </Slide>
+        <Slide theme="tertiary">
+          <Heading size={1} textColor="primary">
+            Quiz time!
+          </Heading>
+        </Slide>
+        <Slide theme="secondary">
+          <Image src={goodWork} width={900} />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} lineHeight={1}>Task #5.1 - handing async code with callbacks</Heading>
+          <List>
+            <ListItem>Get list of users from <code>https://jsonplaceholder.typicode.com/users</code> using <code>request</code></ListItem>
+            <ListItem>Deserialize JSON response</ListItem>
+            <ListItem>Map the results to an array of emails</ListItem>
+            <ListItem>Log the result to the console</ListItem>
+          </List>
+          <Code fileName="async-callbacks.ts" textSize={35} />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} lineHeight={1}>Task #5.2 - handing async code with promises</Heading>
+          <List>
+            <ListItem>Get list of tasks from <code>https://jsonplaceholder.typicode.com/todos</code> using <code>Fetch API</code></ListItem>
+            <ListItem>Deserialize JSON response</ListItem>
+            <ListItem>Count number of completed and uncompleted tasks</ListItem>
+            <ListItem>Log the result as an object literal to the console</ListItem>
+            <ListItem>Catch errors and log them too (try an incorrect URL and see if the error handling works)</ListItem>
+          </List>
+          <Code fileName="async-promises.ts" textSize={35} />
+        </Slide>
+        <Slide theme="tertiary">
+          <Heading size={1} textColor="primary">
+            ⚠️ Remember ⚠️
+          </Heading>
+          <List>
+            <ListItem>Callbacks are bad, and lead to "callback hell" (nested callbacks) - use libraries that support Promises, or use <code>util.promisify</code> from Node to convert to Promise-based API</ListItem>
+            <ListItem><code>try/catch/finally</code> doesn't work with callbacks and promises</ListItem>
+            <ListItem>Unhandled promise rejections will kill the Node.js process</ListItem>
+          </List>
+        </Slide>
+        <Slide wider theme="primary">
+          <Heading size={3} lineHeight={1}>Task #5.3 - handing async code with async/await keywords</Heading>
+          <List>
+            <ListItem>Adapt your solution from task #5.2 to use async/await keywords</ListItem>
+            <ListItem>Now, you can write your code as if it was synchronous, and use try/catch/finally</ListItem>
+          </List>
+          <Code fileName="async-async-await.ts" textSize={35} />
         </Slide>
       </Deck>
     );

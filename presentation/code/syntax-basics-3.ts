@@ -1,11 +1,3 @@
-try {
-  someOperation();
-} catch (error) {
-  console.error(error);
-} finally {
-  tearDown();
-}
-
 class User {
   constructor(name, surname, age) {
     this.name = name;
@@ -14,7 +6,7 @@ class User {
   }
 
   get fullName() {
-    return this.name + this.surname;
+    return `${this.name} ${this.surname}`;
   }
 
   generateSummary() {

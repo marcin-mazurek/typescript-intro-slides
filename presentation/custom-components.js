@@ -40,12 +40,17 @@ const StandardSlide = styled(BaseSlide)`
   max-height: 100%;
 `;
 
+const WiderSlide = styled(BaseSlide)`
+  max-height: 100%;
+  max-width: 60%;
+`;
+
 const WideSlide = styled(BaseSlide)`
   max-height: 100%;
   max-width: 80%;
 `;
 
-export const Slide = ({ theme, wide, ...props }) => {
+export const Slide = ({ theme, wide, wider, ...props }) => {
   const baseProps = {
     transition: ['fade']
   };
@@ -65,7 +70,11 @@ export const Slide = ({ theme, wide, ...props }) => {
 
   if (wide) {
     return <WideSlide {...baseProps} {...props} />;
-  } else {
+  }
+  else if (wider) {
+    return <WiderSlide {...baseProps} {...props} />;
+  }
+  else {
     return <StandardSlide {...baseProps} {...props} />;
   }
 }
