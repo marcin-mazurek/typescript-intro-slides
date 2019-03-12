@@ -34,7 +34,7 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide theme="primary" wide>
           <Heading size={3} textColor="secondary">
-            A few facts about JavaScript
+            A few facts about Javascript
           </Heading>
           <List>
             <Appear><ListItem>Weakly typed</ListItem></Appear>
@@ -66,16 +66,16 @@ export default class Presentation extends React.Component {
           </Heading>
           <List textColor="primary">
             <Appear><ListItem>TypeScript is a programming language developed by Microsoft</ListItem></Appear>
-            <Appear><ListItem>TypeScript compiles to JavaScript</ListItem></Appear>
-            <Appear><ListItem>TypeScript is superset of JavaScript</ListItem></Appear>
+            <Appear><ListItem>TypeScript compiles to Javascript</ListItem></Appear>
+            <Appear><ListItem>TypeScript is superset of Javascript</ListItem></Appear>
             <Appear><ListItem>Works with Node.js</ListItem></Appear>
-            <Appear><ListItem>You can use any JavaScript library and tooling</ListItem></Appear>
+            <Appear><ListItem>You can use any Javascript library and tooling</ListItem></Appear>
           </List>
           <Notes>
             <ul>
               <li>What is TS and how is it different from JS?</li>
               <li>TS is superset of JS - Valid JS code is valid TS. This makes it possible to introduce TS to already existing project easily, and provides an easy learning curve</li>
-              <li>Using TypeScript, you can still use any library from JavaScript eco-system, which makes it a very powerful language</li>
+              <li>Using TypeScript, you can still use any library from Javascript eco-system, which makes it a very powerful language</li>
             </ul>
           </Notes>
         </Slide>
@@ -89,7 +89,7 @@ export default class Presentation extends React.Component {
             <Appear><ListItem>It has a smart compiler that catches a lot of mistakes before you run your code</ListItem></Appear>
             <Appear><ListItem>It works out of the box</ListItem></Appear>
             <Appear><ListItem>Used by Gaming developers</ListItem></Appear>
-            <Appear><ListItem>Stable, mature, the most popular typing solution for JavaScript</ListItem></Appear>
+            <Appear><ListItem>Stable, mature, the most popular typing solution for Javascript</ListItem></Appear>
           </List>
           <Notes>
             <li>It provides features well-known in object oriented programming languages such as static types, interfaces, generics, annotations (which are called decorators)
@@ -106,22 +106,22 @@ export default class Presentation extends React.Component {
             Ecosystem
           </Heading>
           <List textColor="primary">
-            <Appear><ListItem>npm - Node.js package manager (used for front-end JavaScript packages these days too)</ListItem></Appear>
+            <Appear><ListItem>npm - Node.js package manager (used for front-end Javascript packages these days too)</ListItem></Appear>
             <Appear><ListItem>yarn - Facebook's alternative to npm, used by majority of Gaming projects</ListItem></Appear>
             <Appear><ListItem>npx - npm package runner, allows to run a CLI command without installing the package (eg. one-off project skeleton generation)</ListItem></Appear>
-            <Appear><ListItem>Babel - most popular JavaScript transpiler (not required when working with TypeScript)</ListItem></Appear>
+            <Appear><ListItem>Babel - most popular Javascript transpiler (not required when working with TypeScript)</ListItem></Appear>
           </List>
           <Notes>
             <ul>
               <li>What is TS and how is it different from JS?</li>
               <li>TS is superset of JS - Valid JS code is valid TS. This makes it possible to introduce TS to already existing project easily, and provides an easy learning curve</li>
-              <li>Using TypeScript, you can still use any library from JavaScript eco-system, which makes it a very powerful language</li>
+              <li>Using TypeScript, you can still use any library from Javascript eco-system, which makes it a very powerful language</li>
             </ul>
           </Notes>
         </Slide>
         <Slide wide theme="secondary">
           <Heading size={1} textColor="primary">
-            Basics of JavaScript syntax
+            Basics of Javascript syntax
           </Heading>
         </Slide>
         <Slide theme="primary">
@@ -146,7 +146,7 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide theme="primary">
           <Heading size={3}>
-            JavaScript types
+            Javascript types
           </Heading>
           <Code fileName="types-js.ts" />
           <Notes>
@@ -161,9 +161,9 @@ export default class Presentation extends React.Component {
             TypeScript types
           </Heading>
           <Notes>
-            The basic types don't change - any valid JavaScript is valid TypeScript.
-            Also, TypeScript compiles to JavaScript, and it's JavaScript engine that executes your code.
-            Any notion of TypeScript is removed in the runtime, and you're only left with basic JavaScript types.
+            The basic types don't change - any valid Javascript is valid TypeScript.
+            Also, TypeScript compiles to Javascript, and it's Javascript engine that executes your code.
+            Any notion of TypeScript is removed in the runtime, and you're only left with basic Javascript types.
           </Notes>
           <Code fileName="types-ts.ts" />
         </Slide>
@@ -192,11 +192,19 @@ export default class Presentation extends React.Component {
             <ul>
               <li>What is TS and how is it different from JS?</li>
               <li>TS is superset of JS - Valid JS code is valid TS. This makes it possible to introduce TS to already existing project easily, and provides an easy learning curve</li>
-              <li>Using TypeScript, you can still use any library from JavaScript eco-system, which makes it a very powerful language</li>
+              <li>Using TypeScript, you can still use any library from Javascript eco-system, which makes it a very powerful language</li>
             </ul>
           </Notes>
         </Slide>
+        <Slide wide theme="secondary">
+          <Heading size={1} textColor="primary">
+            Module management in Javascript
+          </Heading>
+        </Slide>
         <Slide wider theme="primary">
+          <BaseHeading size={3} textColor="secondary" lineHeight={2}>
+            ECMAScript 2015 style
+          </BaseHeading>
           <BaseHeading size={5} textColor="secondary" lineHeight={2}>
             Exporting from modules
           </BaseHeading>
@@ -207,10 +215,26 @@ export default class Presentation extends React.Component {
           </BaseHeading>
           <Code fileName="modules2.ts" />
         </Slide>
-        <Slide wide theme="secondary">
-          <Heading size={3} textColor="primary">
+        <Slide wider theme="primary">
+          <BaseHeading size={3} textColor="secondary" lineHeight={2}>
+            CommonJS (old-school) style
+          </BaseHeading>
+          <BaseHeading size={5} textColor="secondary" lineHeight={2}>
+            Exporting from modules
+          </BaseHeading>
+          <Code fileName="modules4.ts" />
+          <br />
+          <BaseHeading size={5} textColor="secondary" lineHeight={2}>
+            Importing from modules
+          </BaseHeading>
+          <Code fileName="modules3.ts" />
+        </Slide>
+        <Slide wide theme="tertiary">
+          <Heading size={1} textColor="primary">
             Coding standards
           </Heading>
+        </Slide>
+        <Slide wide theme="secondary">
           <BaseHeading size={5} textColor="primary">
             Most popular
           </BaseHeading>
@@ -233,8 +257,8 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide theme="secondary" textColor="black">
           <Terminal title="Terminal" output={[
-            "git clone https://git.nonprod.williamhill.plc/",
-            "   ↪ mmazurek/TypeScript-Intro-Slides.git",
+            "git clone https://github.com/marcin-mazurek/",
+            "   ↪ mmazurek/typescript-intro-tasks.git",
             "cd typescript-intro-tasks",
             "npm install",
             ["npm test", <span>npm test <em># executes tests once</em></span>],
@@ -300,9 +324,9 @@ export default class Presentation extends React.Component {
           </Heading>
           <List>
             <Appear><ListItem>No multi-inheritance</ListItem></Appear>
-            <Appear><ListItem>No mixins support by TypeScript syntax (possible in vanilla JavaScript and using decorators - annotations equivalent)</ListItem></Appear>
+            <Appear><ListItem>No mixins support by TypeScript syntax (possible in vanilla Javascript and using decorators - annotations equivalent)</ListItem></Appear>
             <Appear><ListItem>No run-time type checks (unless an additional library is used)</ListItem></Appear>
-            <Appear><ListItem>Overloading is very tricky due to no native JavaScript equivalent</ListItem></Appear>
+            <Appear><ListItem>Overloading is very tricky due to no native Javascript equivalent</ListItem></Appear>
           </List>
         </Slide>
         <Slide wide theme="primary">
@@ -368,10 +392,10 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide wide theme="tertiary">
           <Heading size={1} textColor="primary">
-            The most tricky part of JavaScript - <code>this</code> keyword
+            The most tricky part of Javascript - <code>this</code> keyword
           </Heading>
           <Notes>
-            The most tricky part of JavaScript is definitely the "this" keyword. The value of this variable is determined primarly by how a function is called, but it can be overwritten or
+            The most tricky part of Javascript is definitely the "this" keyword. The value of this variable is determined primarly by how a function is called, but it can be overwritten or
             may not exist - depending on a context. Let's walk through the most popular use cases.
           </Notes>
         </Slide>
@@ -475,6 +499,60 @@ export default class Presentation extends React.Component {
             <ListItem>Now, you can write your code as if it was synchronous, and use try/catch/finally</ListItem>
           </List>
           <Code fileName="async-async-await.ts" textSize={35} />
+        </Slide>
+        <Slide wider theme="secondary">
+          <Heading size={1} lineHeight={1} textColor="primary">More advanced syntax</Heading>
+        </Slide>
+        <Slide wider theme="primary">
+          <Heading size={3} lineHeight={1}>Default parameters</Heading>
+          <Code fileName="default-params.ts" textSize={35} />
+        </Slide>
+        <Slide wider theme="primary">
+          <Heading size={3} lineHeight={1}>Spread operator - arrays</Heading>
+          <Code fileName="spread.ts" textSize={35} />
+        </Slide>
+        <Slide wider theme="primary">
+          <Heading size={3} lineHeight={1}>Spread operator - objects</Heading>
+          <Code fileName="spread2.ts" textSize={35} />
+        </Slide>
+        <Slide wider theme="primary">
+          <Heading size={3} lineHeight={1}>Spread operator - function arguments</Heading>
+          <Code fileName="spread3.ts" textSize={35} />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={3} lineHeight={1}>Rest parameters</Heading>
+          <Code fileName="rest-params.ts" textSize={35} />
+        </Slide>
+        <Slide wider theme="primary">
+          <Heading size={3} lineHeight={1}>Destructuring</Heading>
+          <Code fileName="destructuring.ts" textSize={35} />
+        </Slide>
+        <Slide wider theme="primary">
+          <Heading size={3} lineHeight={1}>Decorators</Heading>
+          <Code fileName="decorators.ts" textSize={35} />
+        </Slide>
+        <Slide theme="tertiary">
+          <Heading size={1} lineHeight={1} textColor="primary">Task #6 - hands-on WebDriverIO</Heading>
+        </Slide>
+        <Slide theme="secondary" textColor="black">
+          <Terminal title="Terminal" output={[
+            "git clone https://github.com/marcin-mazurek/",
+            "   ↪ typescript-wdio-boilerplate.git",
+            "cd typescript-wdio-boilerplate",
+            "npm install",
+            "npm test"
+          ]} />
+        </Slide>
+        <Slide wider theme="primary">
+          <Heading size={2} lineHeight={1}>Recommended resources</Heading>
+          <List>
+            <ListItem><a href="https://javascript.info/">https://javascript.info/</a> - The Modern Javascript Tutorial</ListItem>
+            <ListItem><a href="https://www.typescriptlang.org/docs/">https://www.typescriptlang.org/docs/</a> - official TypeScript documentation</ListItem>
+            <ListItem><a href="https://basarat.gitbooks.io/typescript/">https://basarat.gitbooks.io/typescript/</a> - TypeScript Deep Dive</ListItem>
+          </List>
+        </Slide>
+        <Slide wider theme="secondary">
+          <Heading size={1} lineHeight={1} textColor="primary">Thank you!</Heading>
         </Slide>
       </Deck>
     );
