@@ -119,6 +119,17 @@ export default class Presentation extends React.Component {
             </ul>
           </Notes>
         </Slide>
+        <Slide wide theme="primary">
+          <Heading size={4}>
+            Installing packages in JavaScript
+          </Heading>
+          <Code fileName="installing-packages-js.sh" lang="php" />
+          <br /><br />
+          <Heading size={4}>
+            Installing packages in TypeScript
+          </Heading>
+          <Code fileName="installing-packages-ts.sh" lang="php" />
+        </Slide>
         <Slide wide theme="secondary">
           <Heading size={1} textColor="primary">
             Basics of Javascript syntax
@@ -131,6 +142,12 @@ export default class Presentation extends React.Component {
         <Slide theme="primary">
           <Heading size={5} textColor="secondary">Instructions</Heading>
           <Code fileName="syntax-basics-2.ts" />
+        </Slide>
+        <Slide wide theme="primary">
+          <Heading size={5} textColor="secondary">Function closure</Heading>
+          <Code fileName="syntax-basics-6.ts" textSize={35} />
+          <br />
+          <Code fileName="syntax-basics-7.ts" textSize={35} />
         </Slide>
         <Slide wider theme="primary">
           <Heading size={5} textColor="secondary">Working with objects - the modern way</Heading>
@@ -504,6 +521,10 @@ export default class Presentation extends React.Component {
           <Heading size={1} lineHeight={1} textColor="primary">More advanced syntax</Heading>
         </Slide>
         <Slide wider theme="primary">
+          <Heading size={3} lineHeight={1}>Automatic type conversion</Heading>
+          <Code fileName="type-casting.ts" textSize={35} />
+        </Slide>
+        <Slide wider theme="primary">
           <Heading size={3} lineHeight={1}>Default parameters</Heading>
           <Code fileName="default-params.ts" textSize={35} />
         </Slide>
@@ -530,6 +551,13 @@ export default class Presentation extends React.Component {
         <Slide wider theme="primary">
           <Heading size={3} lineHeight={1}>Decorators</Heading>
           <Code fileName="decorators.ts" textSize={35} />
+        </Slide>
+        <Slide wider theme="primary">
+          <Heading size={3} lineHeight={1}>Debugging</Heading>
+          <Code fileName="debugging.ts" textSize={35} />
+          <br />
+          <Heading size={5} lineHeight={1}>Running code in debug mode (with interactive console)</Heading>
+          <Code fileName="inspect.sh" textSize={35} />
         </Slide>
         <Slide theme="tertiary">
           <Heading size={1} lineHeight={1} textColor="primary">Task #6 - hands-on WebDriverIO</Heading>
